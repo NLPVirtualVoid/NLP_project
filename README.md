@@ -1,3 +1,3 @@
 ## NLP_project
 
-This repository is for collaboration on a UCL NLP project lookng at code generation
+This repository is for collaboration on a UCL NLP project lookng at code generation by team VirtualVoid.
