@@ -72,7 +72,7 @@ git push origin main  # upload the updated code to master
  ```bash
 git branch -d feature-<yourname>-dev # delete the dev branch
 git push origin :feature-<yourname>-dev # update the remote too
-
+```
 It might seem wasteful to delete the local/remote feature branches if one is only going to recreate them
 for the next set of changes but actually this is very helpful for those not superfamiliar with git
 because it keeps everything clean 
