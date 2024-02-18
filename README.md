@@ -11,7 +11,7 @@ First, clone the repository:
 git clone https://github.com/NLPVirtualVoid/NLP_project
 ```
 Then set up a virtual environment by opening the Anaconda prompt, changing your directory to your local project directory, and finally
-running the following comnand from the Anaconda prompt:
+running the following command from the Anaconda prompt:
 ```bash
 conda env create -f NLP_project.yml
 ```
