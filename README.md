@@ -27,6 +27,8 @@ N.B. That the branch called ``master`` in that document is called ``main`` for o
 
 Standard workflow should work like this:
 
+N.B. All commands below should be executed on the terminal command line when in the **project directory**
+
 1. Ensure your copy of main is up to date with the remote and create a feature branch off this for your upcoming changes:
 
 ```bash
