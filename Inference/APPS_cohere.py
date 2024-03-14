@@ -54,22 +54,64 @@ class cohereAPI:
             indices = [idx for idx in indices if idx < len(self.data)] # constrain indices
 
         for idx in indices:
+
             problem = self.data[idx]
 
-            if not problem['processed']:
-                inference_start_time = time.time()
+            if 'ERROR' in problem.keys():
+                print("ERROR in generating prompt ...")
+                continue
 
+            output_dir = self.output_path + problem['ID']
+
+            inference_start_time = time.time()
+
+            try:
+                os.makedirs(output_dir,exist_ok=True)
+            except RuntimeError as error:
+                print(error)
+                print("Failed to makedir : [%s]" % output_dir)
+                continue
+
+            try:
                 generated_code = self.cohereAPI.generate(prompt=problem['prompt'])
-                code_as_string = str(generated_code.data)
-                match = re.search('```Python(.*?)```', code_as_string )
-                # If the pattern was found, print it
-                if match:
-                    print("Code found:", match.group())
-                else:
-                    print("Code not found")
+            except RuntimeError as error:
+                print(error)
+                print("Cohere API call failed ...")
+                self.write_fail_log(output_dir,"Cohere API call failed")
+                continue
 
-                inference_end_time = time.time()
-                print("Inference for problem [%s] : elapsed time = %.01f" % (problem['ID'],inference_end_time - inference_start_time))
+            code_as_string = str(generated_code.data)
+            pattern = r'```Python(.*?)```'
+            match = re.search(pattern,code_as_string, re.DOTALL)
+
+            # If the pattern was found, print it
+
+            if match:
+                output_file = output_dir + "/solution.py"
+                try:
+                    with open(output_file,'w',encoding='utf-8') as f:
+                        f.write(match.group(1))
+                except RuntimeError as error:
+                    print(error)
+                    print("Failed to write solution.py ...")
+            else:
+                print("No code found in the solution")
+                self.write_fail_log(output_dir, "No code found in the API response")
+
+            inference_end_time = time.time()
+            print("Inference for problem [%s] : total elapsed time = %.01f" % (problem['ID'],inference_end_time - inference_start_time))
+
+    def write_fail_log(self,output_dir,reason):
+        output_file = output_dir + "/FAILED.txt"
+        try:
+            with open(output_file, 'w', encoding='utf-8') as f:
+                f.write(reason)
+        except RuntimeError as error:
+            print(error)
+            print("write_fail_log failed ...")
+
+
+
 
 
 
@@ -77,8 +119,11 @@ class cohereAPI:
 if __name__ == '__main__':
 
     # THIS NEEDS TO BE SET TO LOCAL TARGET FOR EACH USER
-    APPS_path = "C:/dev/data/APPS/train/"
-    API_key = 'QuJsUpkmdGXMhsBOMD6B40OvYMvgCTx1gkQmXtij'
+    APPS_path = "C:/dev/data/APPS/test/"
+
+    with open("../CoH_API_token.txt") as f:
+        API_key = f.readline()
 
     I = cohereAPI(APPS_path,API_key)
-    I.generate([0])
+    idx = list(range(4330-35,4330-34))
+    I.generate(idx)

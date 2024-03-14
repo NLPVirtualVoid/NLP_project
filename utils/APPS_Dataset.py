@@ -34,8 +34,13 @@ class AppsDataset(Dataset):
 
         problem_path = self.path + problem + "/question.txt"
 
-        with open(problem_path, "r") as file:
-            prompt = file.read()
+        try:
+            with open(problem_path, "r",encoding='utf-8') as file:
+                prompt = file.read()
+        except RuntimeError as error:
+            print(error)
+            print("Failed to read APPS problem")
+            return {"ERROR": True }
 
 
         preamble = "Provide Python code to solve the following problem : "
