@@ -320,9 +320,9 @@ def main():
     remove_examples(APPS_path,'test', max_folder_size_MB=10)
     remove_examples(APPS_path,'train', max_folder_size_MB=10)
     problem_catalogue(APPS_path,test=True)
-    create_test_set(APPS_path,300,"testset_300")
+    #create_test_set(APPS_path,300,"testset_300")
 
-    
+
 
 if __name__ == '__main__':
     main()
