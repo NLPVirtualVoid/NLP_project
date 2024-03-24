@@ -7,7 +7,7 @@ import os
 ROOT = os.path.dirname(os.path.abspath(__file__))
 HUMAN_EVAL = os.path.join(ROOT, "..", "data", "HumanEval.jsonl.gz")
 HUMAN_EVAL = "C:/DEV/data/HumanEval/HumanEval.jsonl.gz"
-HUMAN_EVAL = "HumanEval.jsonl.gz"
+#HUMAN_EVAL = "HumanEval.jsonl.gz"
 
 
 def read_problems(evalset_file: str = HUMAN_EVAL) -> Dict[str, Dict]:
