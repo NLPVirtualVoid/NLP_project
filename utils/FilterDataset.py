@@ -314,14 +314,15 @@ def create_test_set(APPS_path,size,dir_name = None):
 
 
 def main():
-    #APPS_path = input("Please provide the relative or full path to your copy of the APPS dataset - e.g. 'C:/dev/APPS'?")
-    APPS_path = 'C:/DEV/data/APPS/'
-    #cat = problem_catalogue(APPS_path,test=True)
-    test = create_test_set(APPS_path,300,"deletethis")
-    x = 1
-    #remove_examples(APPS_path,'test', max_folder_size_MB=10)
-    #remove_examples(APPS_path,'train', max_folder_size_MB=10)
+    APPS_path = input("Please provide the relative or full path to your copy of the APPS dataset - e.g. 'C:/dev/APPS'?")
+    #APPS_path = 'C:/DEV/data/APPS/'
 
+    remove_examples(APPS_path,'test', max_folder_size_MB=10)
+    remove_examples(APPS_path,'train', max_folder_size_MB=10)
+    problem_catalogue(APPS_path,test=True)
+    create_test_set(APPS_path,300,"testset_300")
+
+    
 
 if __name__ == '__main__':
     main()
