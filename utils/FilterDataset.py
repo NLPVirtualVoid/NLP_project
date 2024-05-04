@@ -1,6 +1,12 @@
 """
-This script can filter the APPS dataset and copy-delete large examples to separate folders.
+This script can filter the APPS dataset and copy-delete large examples (size threshold set by the user) to separate folders.
 This is useful as the top 100 test examples are nearly 90% of dataset by size.
+
+It also contains the code for creating the curated APPS300 dataset which was used for evaluation on the project. This 
+dataset selects problems by stratified sampling on the test set using a list of conditions to filter out problems
+that are deficient or problematic (see the report).
+
+See *main* for examples of usage
 """
 
 import os
@@ -315,12 +321,12 @@ def create_test_set(APPS_path,size,dir_name = None):
 
 def main():
     APPS_path = input("Please provide the relative or full path to your copy of the APPS dataset - e.g. 'C:/dev/APPS'?")
-    #APPS_path = 'C:/DEV/data/APPS/'
+    
 
     remove_examples(APPS_path,'test', max_folder_size_MB=10)
     remove_examples(APPS_path,'train', max_folder_size_MB=10)
     problem_catalogue(APPS_path,test=True)
-    #create_test_set(APPS_path,300,"testset_300")
+    create_test_set(APPS_path,300,"testset_300")
 
 
 
