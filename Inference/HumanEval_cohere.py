@@ -1,3 +1,8 @@
+"""
+This module contains code for running inference using the Cohere API 
+See *main* for an example
+"""
+
 import os
 import cohere
 import time
@@ -121,8 +126,7 @@ if __name__ == '__main__':
     # THIS NEEDS TO BE SET TO LOCAL TARGET FOR EACH USER
     HE_path = "C:/dev/data/HumanEval/"
 
-    with open("../CoH_API_token.txt") as f:
-        API_key = f.readline()
+    API_key = "apikey"
 
     I = Test(HE_path,API_key)
     idx = [0,1]
