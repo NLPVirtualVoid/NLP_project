@@ -1,3 +1,8 @@
+"""
+This module contains code for running inference using the Cohere API on APPS datset problems.
+See *main* for an example.
+"""
+
 import os
 import utils.APPS_Dataset
 import cohere
@@ -121,9 +126,8 @@ if __name__ == '__main__':
     # THIS NEEDS TO BE SET TO LOCAL TARGET FOR EACH USER
     APPS_path = "C:/dev/data/APPS/test/"
 
-    with open("../CoH_API_token.txt") as f:
-        API_key = f.readline()
+    API_key = "apikey"
 
     I = cohereAPI(APPS_path,API_key)
-    idx = list(range(4330-35,4330-34))
+    idx = list(range(1,10))
     I.generate(idx)
