@@ -1,3 +1,7 @@
+"""
+This module contains utility code for a torch Dataset class that handles APPS problem data
+"""
+
 import os
 from torch.utils.data import Dataset
 
